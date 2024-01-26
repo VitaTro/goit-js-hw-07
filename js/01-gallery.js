@@ -3,11 +3,11 @@ import { galleryItems } from './gallery-items.js';
 const gallery = document.querySelector('.gallery'); 
 
 for (let item of galleryItems) {
-    const galleryItem = document.createElement('div');
+    const galleryItem = document.createElement('li');
     galleryItem.classList.add('gallery__item');
 
     const galleryLink = document.createElement('a');
-galleryLink.classList.add('gallery__item');
+galleryLink.classList.add('gallery__link');
 galleryLink.href = item.original;
 
 const galleryImage = document.createElement('img');
