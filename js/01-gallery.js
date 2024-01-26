@@ -29,11 +29,17 @@ if (event.target.nodeName !== "IMG") {
 }
 
 const lightbox = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="900" height="700">
+    <img src="${event.target.dataset.source}" />
   `);
 
   lightbox.show();
-})
+
+ document.addEventListener('keydown', (event) => {
+if(event.key === 'Escape') {
+    lightbox.close();
+}
+ });
+});
 
 console.log(galleryItems);
 
