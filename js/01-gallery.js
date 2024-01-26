@@ -3,33 +3,37 @@ import { galleryItems } from './gallery-items.js';
 const gallery = document.querySelector('.gallery'); 
 
 for (let item of galleryItems) {
-    const galleryItem = document.createElement('li');
-    galleryItem.classList.add('gallery__item');
+    const itemGallery = document.createElement('div');
+    itemGallery.classList.add('gallery__item');
 
-    const galleryLink = document.createElement('a');
-galleryLink.classList.add('gallery__link');
-galleryLink.href = item.original;
+    const linkGallery = document.createElement('a');
+    linkGallery.classList.add('gallery__link');
+    linkGallery.href = item.original;
 
-const galleryImage = document.createElement('img');
-galleryImage.classList.add('.gallery__image');
-galleryImage.src = item.preview;
-galleryImage.alt = item.description;
-galleryImage.dataset.source = item.original;
+const imageGallery = document.createElement('img');
+imageGallery.classList.add('gallery__image');
+imageGallery.src = item.preview;
+imageGallery.alt = item.description;
+imageGallery.dataset.source = item.original;
 
-galleryLink.appendChild(galleryImage);
-galleryItem.appendChild(galleryLink);
-gallery.appendChild(galleryItem);
+linkGallery.append(imageGallery);
+itemGallery.append(linkGallery);
+gallery.append(itemGallery);
+};
+
+gallery.addEventListener('click', (event) => {
+event.preventDefault();
+
+if (event.target.nodeName !== "IMG") {
+  return;
 }
-gallery.addEventListener("click", (event) => {
-    event.preventDefault();
-  
-    const lightbox = basicLightbox.create(`
-      <img src="${event.target.dataset.source}" width="800" height="600">
-    `);
-  
-    lightbox.show();
-  });
 
+const lightbox = basicLightbox.create(`
+    <img src="${event.target.dataset.source}" width="900" height="700">
+  `);
+
+  lightbox.show();
+})
 
 console.log(galleryItems);
 
