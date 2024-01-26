@@ -1,26 +1,22 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-const gallery = document.querySelector('.gallery'); 
+
+const gallery = document.querySelector(".gallery");
 
 for (let item of galleryItems) {
-    const itemGallery = document.createElement('div');
-    itemGallery.classList.add('gallery__item');
-
-    const linkGallery = document.createElement('a');
-    linkGallery.classList.add('gallery__link');
+    
+    const linkGallery = document.createElement("a");
     linkGallery.href = item.original;
+    linkGallery.classList.add("gallery__link");
 
-const imageGallery = document.createElement('img');
-imageGallery.classList.add('gallery__image');
-imageGallery.src = item.preview;
-imageGallery.alt = item.description;
-imageGallery.dataset.source = item.original;
+    const imageGallery = document.createElement("img");
+    imageGallery.classList.add("gallery__image");
+    imageGallery.src = item.preview;
+    imageGallery.alt = item.description;
 
-linkGallery.append(imageGallery);
-itemGallery.append(linkGallery);
-gallery.append(itemGallery);
-};
-
+    linkGallery.append(imageGallery); 
+    gallery.append(linkGallery); 
+   
+}
 
 
-console.log(galleryItems);
