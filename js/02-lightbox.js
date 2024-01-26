@@ -19,4 +19,12 @@ for (let item of galleryItems) {
    
 }
 
+let lightboxElement = new SimpleLightbox('.gallery__link', {
+    captions: true,
+    captionsData: "alt",
+    captionDelay: 250,
+});
 
+gallery.addEventListener("click", (event) => {
+    event.preventDefault();  
+})
