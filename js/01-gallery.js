@@ -16,51 +16,26 @@ const items = galleryItems.map((galleryItem) => {
  }).join(''); 
  gallery.innerHTML = items;
 
-gallery.addEventListener('click', (event) => {
-event.preventDefault();
 
-if (event.target.nodeName !== "IMG") {
-return;
-}
-
-const lightboxShow = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" />
-  `);
-
-  lightboxShow.show();
-
-  const lightboxClose = basicLightbox.create(`
-  <img src="${event.target.dataset.source}" />
-`);
-
-lightboxShow.close();
+ gallery.addEventListener('click', (event) => {
+  event.preventDefault();
   
-
-});
-
-console.log(galleryItems);
-
-
-gallery.addEventListener('click', (event) => {
-event.preventDefault();
-
-if (event.target.nodeName !== "IMG") {
-  return;
-}
-
-const lightbox = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" />
-  `);
-
-  lightbox.show();
-
- document.addEventListener('keydown', (event) => {
-if(event.key === 'Escape') {
-    lightbox.close();
-}
- });
-});
-
-console.log(galleryItems);
-
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+  
+  const lightbox = basicLightbox.create(`
+      <img src="${event.target.dataset.source}" />
+    `);
+  
+    lightbox.show();
+  
+   document.addEventListener('keydown', (event) => {
+  if(event.key === 'Escape') {
+      lightbox.close();
+  }
+   });
+  });
+  
+  console.log(galleryItems);
 
