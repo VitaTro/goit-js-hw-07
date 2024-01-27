@@ -3,28 +3,16 @@ import { galleryItems } from './gallery-items.js';
 
 const gallery = document.querySelector(".gallery");
 
-for (let item of galleryItems) {
-    
-    const linkGallery = document.createElement("a");
-    linkGallery.href = item.original;
-    linkGallery.classList.add("gallery__link");
+const items = galleryItems.map((galleryItem) => {
+ return   `<a class="gallery__item" href="${galleryItem.original}">
+    <img class="gallery__image" src="${galleryItem.preview}" alt="${galleryItem.description}" />
+  </a>`;
+}).join(''); 
+gallery.innerHTML = items;
 
-    const imageGallery = document.createElement("img");
-    imageGallery.classList.add("gallery__image");
-    imageGallery.src = item.preview;
-    imageGallery.alt = item.description;
-
-    linkGallery.append(imageGallery); 
-    gallery.append(linkGallery); 
-   
-}
-
-let lightboxElement = new SimpleLightbox('.gallery__link', {
+let lightboxElement = new SimpleLightbox('.gallery a', {
     captions: true,
     captionsData: "alt",
     captionDelay: 250,
 });
 
-gallery.addEventListener("click", (event) => {
-    event.preventDefault();  
-})

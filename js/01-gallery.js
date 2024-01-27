@@ -2,24 +2,44 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 const gallery = document.querySelector('.gallery'); 
 
-for (let item of galleryItems) {
-    const itemGallery = document.createElement('div');
-    itemGallery.classList.add('gallery__item');
+const items = galleryItems.map((galleryItem) => {
+  return   `<div class="gallery__item">
+  <a class="gallery__link" href="${galleryItem.original}">
+    <img
+      class="gallery__image"
+      src="${galleryItem.preview}"
+      data-source="${galleryItem.original}"
+      alt="${galleryItem.description}"
+    />
+  </a>
+</div>`;
+ }).join(''); 
+ gallery.innerHTML = items;
 
-    const linkGallery = document.createElement('a');
-    linkGallery.classList.add('gallery__link');
-    linkGallery.href = item.original;
+gallery.addEventListener('click', (event) => {
+event.preventDefault();
 
-const imageGallery = document.createElement('img');
-imageGallery.classList.add('gallery__image');
-imageGallery.src = item.preview;
-imageGallery.alt = item.description;
-imageGallery.dataset.source = item.original;
+if (event.target.nodeName !== "IMG") {
+return;
+}
 
-linkGallery.append(imageGallery);
-itemGallery.append(linkGallery);
-gallery.append(itemGallery);
-};
+const lightboxShow = basicLightbox.create(`
+    <img src="${event.target.dataset.source}" />
+  `);
+
+  lightboxShow.show();
+
+  const lightboxClose = basicLightbox.create(`
+  <img src="${event.target.dataset.source}" />
+`);
+
+lightboxShow.close();
+  
+
+});
+
+console.log(galleryItems);
+
 
 gallery.addEventListener('click', (event) => {
 event.preventDefault();
