@@ -17,25 +17,33 @@ const items = galleryItems.map((galleryItem) => {
  gallery.innerHTML = items;
 
 
- gallery.addEventListener('click', (event) => {
+ const openGallery = (event) => {
   event.preventDefault();
   
-  if (event.target.nodeName !== "IMG") {
+  const imageTarget = event.target;
+  if (event.target.nodeName !== "IMG") 
     return;
-  }
+
   
   const lightbox = basicLightbox.create(`
       <img src="${event.target.dataset.source}" />
-    `);
+    `, {
+     
+      onShow: () => {addEventListener ('keydown', closeGallery);
+     },
+      onClose: () => {
+        removeEventListener ('keydown', closeGallery);
+      },
+
+    });
   
     lightbox.show();
-  
-   document.addEventListener('keydown', (event) => {
-  if(event.key === 'Escape') {
-      lightbox.close();
-  }
-   });
-  });
-  
-  console.log(galleryItems);
 
+  function closeGallery(event){
+  if (event.key === 'Escape') {
+    lightbox.close();
+}
+}
+ };
+ gallery.addEventListener("click", openGallery);
+  console.log(galleryItems);
