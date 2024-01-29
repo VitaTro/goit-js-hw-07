@@ -29,7 +29,8 @@ const items = galleryItems.map((galleryItem) => {
       <img src="${event.target.dataset.source}" />
     `, {
      
-      onShow: () => {addEventListener ('keydown', closeGallery);
+      onShow: () => {
+        addEventListener ('keydown', closeGallery);
      },
       onClose: () => {
         removeEventListener ('keydown', closeGallery);
